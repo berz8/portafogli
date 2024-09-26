@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Wallet } from "lucide-react";
 import { auth, signIn } from "@/auth";
-import { db } from "@/db";
-import { users } from "@/db/schema/users";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const usersList = await db.select().from(users).all();
   const session = await auth();
-  console.log(session?.user);
+  if (session) {
+    redirect("/dashboard");
+  }
   return (
     <div className="flex flex-col gap-8 items-center justify-center min-h-screen">
       <Wallet className="w-24 h-24 text-stone-700" />
