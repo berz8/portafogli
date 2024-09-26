@@ -1,11 +1,19 @@
+import { auth } from "@/auth";
 import { CirclePlus, Home, Settings } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function DashboadLayout({
+export default async function DashboadLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
+  if (!session) {
+    redirect("/");
+  }
+
   return (
     <div className="relative">
       <div className="fixed flex justify-around items-center bottom-0 left-0 w-full p-2 shadow-lg bg-stone-50">
