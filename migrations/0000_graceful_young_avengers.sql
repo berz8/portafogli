@@ -15,7 +15,7 @@ CREATE TABLE `expenses` (
 	`currency` text NOT NULL,
 	`date` integer NOT NULL,
 	`category_id` integer,
-	`user_id` integer,
+	`user_id` text,
 	`payment_method` text,
 	`location` text,
 	`notes` text,

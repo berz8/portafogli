@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-8 items-center justify-center min-h-screen">
       <Wallet className="w-24 h-24 text-stone-700" />
-      <h1 className="font-extrabold text-3xl text-center px-6">
+      <h1 className="font-extrabold text-3xl uppercase text-center px-6">
         The App to track all your expenses
       </h1>
       <form
@@ -20,7 +20,7 @@ export default async function Home() {
           await signIn("google");
         }}
       >
-        <Button type="submit" className="px-12">
+        <Button type="submit" className="px-12 font-semibold text-md">
           SignIn with Google
         </Button>
       </form>

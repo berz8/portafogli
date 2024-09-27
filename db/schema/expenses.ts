@@ -11,7 +11,7 @@ export const expenses = sqliteTable("expenses", {
   currency: text("currency").notNull(),
   date: integer("date", { mode: "timestamp" }).notNull(),
   categoryId: integer("category_id").references(() => categories.id),
-  userId: integer("user_id").references(() => users.id), // Assuming you have a users table
+  userId: text("user_id").references(() => users.id), // Assuming you have a users table
   paymentMethod: text("payment_method"),
   location: text("location"),
   notes: text("notes"),
