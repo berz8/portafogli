@@ -9,12 +9,12 @@ export default function Navigation() {
   const currentPath = usePathname();
 
   return (
-    <div className="fixed bottom-0 left-0 flex w-full">
+    <div className="fixed bottom-0 left-0 flex justify-around w-full bg-primary-foreground md:bg-transparent">
       <div
         className={cn(
           "m-3 mb-[CALC(0.5rem_+_env(safe-area-inset-bottom))] w-full",
-          "flex justify-around items-center rounded-lg p-2 shadow-xl bg-stone-50",
-          "md:w-auto md:left-1/2 md:-translate-x-1/2 md:bottom-4 md:rounded-lg md:px-4 md:py-2",
+          "flex justify-around items-center rounded-lg p-2",
+          "md:w-auto md:bottom-4 md:rounded-lg md:px-4 md:py-2 md:bg-white md:shadow-xl md:gap-5",
         )}
       >
         <Link
