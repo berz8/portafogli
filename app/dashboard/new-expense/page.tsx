@@ -1,9 +1,15 @@
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import FormExpense from "./form";
+
 export default function NewExpense() {
   return (
-    <div className="px-4">
-      <h2 className="text-lg text-center font-bold rounded-md shadow-lg bg-stone-100 p-2">
-        Add new expense
-      </h2>
+    <div>
+      <Card>
+        <CardHeader>
+          <CardTitle>New Item</CardTitle>
+        </CardHeader>
+      </Card>
+      <FormExpense />
     </div>
   );
 }

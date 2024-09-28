@@ -22,6 +22,7 @@ export default function Navigation() {
           "px-4 block py-1",
           currentPath === "/dashboard" ? "text-primary" : "text-zinc-400",
         )}
+        prefetch={true}
       >
         <Home className="w-5 h-5" strokeWidth={2.7} />
       </Link>
@@ -33,6 +34,7 @@ export default function Navigation() {
             ? "text-primary"
             : "text-zinc-400",
         )}
+        prefetch={true}
       >
         <CirclePlus className="w-5 h-5" strokeWidth={2.7} />
       </Link>
@@ -44,6 +46,7 @@ export default function Navigation() {
             ? "text-primary"
             : "text-zinc-400",
         )}
+        prefetch={true}
       >
         <Settings className="w-5 h-5" strokeWidth={2.7} />
       </Link>

@@ -5,6 +5,7 @@ import { users } from "@/db/schema/users";
 import { eq } from "drizzle-orm";
 import { signOut } from "@/auth";
 import { redirect } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function Settings() {
   const session = await auth();
@@ -18,20 +19,22 @@ export default async function Settings() {
 
   return (
     <div>
-      <div className="rounded-xl shadow-lg bg-stone-100 p-4 mb-6">
-        <h2 className="text-lg text-center font-bold pb-4 font-mono">
-          Settings
-        </h2>
-        <div className="flex gap-4 items-center">
-          <div className="rounded-full w-14 h-14 overflow-hidden">
-            <img src={userData?.image ?? undefined} alt="profile pic" />
+      <Card>
+        <CardHeader>
+          <CardTitle>Settings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex gap-4 items-center">
+            <div className="rounded-full w-14 h-14 overflow-hidden">
+              <img src={userData?.image ?? undefined} alt="profile pic" />
+            </div>
+            <div>
+              <h3 className="font-semibold">{userData?.name}</h3>
+              <div className="text-stone-800">{userData?.email}</div>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold">{userData?.name}</h3>
-            <div className="text-stone-800">{userData?.email}</div>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
       <form
         className="mt-20"
         action={async () => {
@@ -41,7 +44,7 @@ export default async function Settings() {
           });
         }}
       >
-        <Button variant="secondary" className="w-full" type="submit">
+        <Button variant="outline" className="w-full" type="submit">
           Sign Out
         </Button>
       </form>
