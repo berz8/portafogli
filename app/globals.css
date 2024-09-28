@@ -20,8 +20,8 @@ body {
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
-    --primary: 24 9.8% 10%;
-    --primary-foreground: 60 9.1% 97.8%;
+    --primary: 240 6 26;
+    --primary-foreground: 0 0 97%;
     --secondary: 60 4.8% 95.9%;
     --secondary-foreground: 24 9.8% 10%;
     --muted: 60 4.8% 95.9%;
@@ -77,4 +77,9 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.dark-metal-gradient {
+  background: rgb(39, 39, 42);
+  background: linear-gradient(135deg, rgba(39, 39, 42, 1) 0%, rgba(65, 65, 73, 1) 22%, rgba(80, 80, 90, 1) 32%, rgba(68, 68, 78, 1) 40%, rgba(60, 60, 68, 1) 58%, rgba(68, 68, 77, 1) 70%, rgba(46, 46, 52, 1) 77%, rgba(24, 24, 27, 1) 100%);
 }

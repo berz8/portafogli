@@ -11,11 +11,13 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <div className="text-[3.5rem] font-mono font-bold text-stone-900">
-        € {currentMonthExpenses.reduce((acc, item) => acc + item.amount, 0)}
-      </div>
-      <div className="text-lg text-stone-600 font-bold -mt-2">
-        Current Month Balance
+      <div className="rounded-xl dark-metal-gradient p-4 text-right shadow-lg">
+        <div className="text-[3.5rem] leading-[3.3rem] font-mono font-semibold text-primary-foreground">
+          € {currentMonthExpenses.reduce((acc, item) => acc + item.amount, 0)}
+        </div>
+        <div className="text-primary-foreground opacity-70">
+          Current Month Balance
+        </div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ export default function Navigation() {
         href="/dashboard"
         className={cn(
           "px-4 block py-1",
-          currentPath === "/dashboard" ? "text-zinc-900" : "text-zinc-400",
+          currentPath === "/dashboard" ? "text-primary" : "text-zinc-400",
         )}
       >
         <Home className="w-5 h-5" strokeWidth={2.7} />
@@ -29,7 +29,7 @@ export default function Navigation() {
         className={cn(
           "px-4 block py-1",
           currentPath === "/dashboard/new-expense"
-            ? "text-zinc-900"
+            ? "text-primary"
             : "text-zinc-400",
         )}
       >
@@ -40,7 +40,7 @@ export default function Navigation() {
         className={cn(
           "px-4 block py-1",
           currentPath === "/dashboard/settings"
-            ? "text-zinc-900"
+            ? "text-primary"
             : "text-zinc-400",
         )}
       >
