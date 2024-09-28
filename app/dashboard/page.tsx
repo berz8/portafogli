@@ -11,7 +11,7 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <div className="text-[3.5rem] font-bold text-stone-900">
+      <div className="text-[3.5rem] font-mono font-bold text-stone-900">
         € {currentMonthExpenses.reduce((acc, item) => acc + item.amount, 0)}
       </div>
       <div className="text-lg text-stone-600 font-bold -mt-2">

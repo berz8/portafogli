@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Jura } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ViewTransitions } from "next-view-transitions";
@@ -13,6 +14,10 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+const jura = Jura({
+  subsets: ["latin"],
+  variable: "--font-jura",
 });
 
 export const metadata: Metadata = {
@@ -32,6 +37,7 @@ export default function RootLayout({
           className={cn(
             geistSans.variable,
             geistMono.variable,
+            jura.variable,
             "antialiased",
             "bg-gradient-to-br from-stone-50 via-stone-300 to-stone-200",
             "min-h-screen",
