@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Wallet } from "lucide-react";
 import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
 
