@@ -15,6 +15,7 @@ export const expenses = sqliteTable("expenses", {
   paymentMethod: text("payment_method"),
   location: text("location"),
   notes: text("notes"),
+  type: text("type").notNull().default("out"),
   isRecurring: integer("is_recurring", { mode: "boolean" })
     .notNull()
     .default(false),

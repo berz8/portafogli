@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ad2917bf-8755-40f5-94a3-f38d7e765919",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "2a4f58e4-fd07-47a8-94a0-1aacbd1bfe4b",
+  "prevId": "ad2917bf-8755-40f5-94a3-f38d7e765919",
   "tables": {
     "categories": {
       "name": "categories",
@@ -165,6 +165,14 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'out'"
         },
         "is_recurring": {
           "name": "is_recurring",

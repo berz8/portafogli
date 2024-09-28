@@ -12,33 +12,40 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import NumericInput from "@/components/ui/numericInput";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-const formSchema = z.object({
+export const newExpenseFormSchema = z.object({
   amount: z.number().gt(0),
   type: z.enum(["in", "out"]),
   date: z.date(),
-  description: z.string().max(100),
+  description: z.string().min(1).max(100),
+  currency: z.string(),
 });
 
-export default function FormExpense() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export default function FormExpense({
+  addExpenseAction,
+}: {
+  addExpenseAction: (data: z.infer<typeof newExpenseFormSchema>) => void;
+}) {
+  const form = useForm<z.infer<typeof newExpenseFormSchema>>({
+    resolver: zodResolver(newExpenseFormSchema),
     defaultValues: {
       type: "out",
       date: new Date(),
       amount: 0,
+      description: "",
+      currency: "euro",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
+      <form
+        onSubmit={form.handleSubmit((data) => addExpenseAction(data))}
+        className="space-y-8 mt-4"
+      >
         <FormField
           control={form.control}
           name="type"
@@ -99,10 +106,11 @@ export default function FormExpense() {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <NumericInput
+                <Input
                   className="text-right"
                   {...field}
                   onChange={(event) => field.onChange(+event.target.value)}
+                  type="number"
                 />
               </FormControl>
               <FormMessage />

@@ -1,6 +1,7 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
 import { expenses } from "./expenses";
+import { users } from "./users";
 
 // Categories table
 export const categories = sqliteTable("categories", {
@@ -9,6 +10,7 @@ export const categories = sqliteTable("categories", {
   description: text("description"),
   color: text("color"), // For UI representation
   icon: text("icon"), // For UI representation
+  userId: text("user_id").references(() => users.id),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
@@ -18,6 +20,10 @@ export const categories = sqliteTable("categories", {
 });
 
 // Relationships
-export const categoriesRelations = relations(categories, ({ many }) => ({
+export const categoriesRelations = relations(categories, ({ many, one }) => ({
   expenses: many(expenses),
+  user: one(users, {
+    fields: [categories.userId],
+    references: [users.id],
+  }),
 }));

@@ -15,6 +15,7 @@ const NumericInput = React.forwardRef<
       ".",
     ];
     if (!allowedKeys.includes(event.key) && isNaN(Number(event.key))) {
+      console.log(event.key);
       event.preventDefault();
     }
 
