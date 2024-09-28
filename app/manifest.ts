@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Portafogli",
     description: "The App to track all your expenses",
     display: "standalone",
+    orientation: "portrait",
     background_color: "#f6f6f6",
     theme_color: "#f6f6f6",
     scope: "https://portafogli.berz.it/",

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
+import GridPattern from "@/components/ui/grid-pattern";
+import { cn } from "@/lib/utils";
 
 export default async function Home() {
   const session = await auth();
@@ -9,11 +11,29 @@ export default async function Home() {
   }
   return (
     <div className="flex flex-col gap-8 items-center justify-center mt-60">
-      <div className="w-44 md:w-60">
-        <img src="/icon.png" alt="Portafogli - Icon" />
+      <GridPattern
+        width={30}
+        height={30}
+        x={-1}
+        y={-1}
+        strokeDasharray={"4 2"}
+        className={cn(
+          "[mask-image:radial-gradient(900px_circle_at_center,#f6f6f6,transparent)]",
+          "z-[-1]",
+        )}
+      />
+      <div className="flex flex-col gap-4 mb-8">
+        <div className="relative w-44 h-44 md:w-56 md:h-56 rounded-[40px] shadow-xl flex items-center justify-around dark-metal-gradient">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+7px)] md:-translate-y-[calc(50%+10px)] text-[156px] md:text-[180px] text-shadow leading-none font-jura font-bold">
+            $
+          </div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+7px)]  md:-translate-y-[calc(50%+10px)] text-[156px] md:text-[180px] light-metal-text leading-none font-jura font-bold">
+            $
+          </div>
+        </div>
       </div>
       <h1 className="font-mono font-bold text-3xl uppercase text-center text-primary px-6">
-        The App to track all your expenses
+        The easiest way to track your money
       </h1>
       <form
         action={async () => {

@@ -4,6 +4,7 @@ import { Jura } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ViewTransitions } from "next-view-transitions";
+import type { Viewport } from "next";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,6 +24,10 @@ const jura = Jura({
 export const metadata: Metadata = {
   title: "Portafogli",
   description: "The app to track all your expenses",
+};
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
