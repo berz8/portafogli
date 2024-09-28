@@ -11,6 +11,7 @@ export default function Navigation() {
   return (
     <div
       className={cn(
+        "mb-[CALC(0.5rem_+_env(safe-area-inset-bottom))]",
         "fixed flex justify-around items-center bottom-2 left-2 w-[calc(100%-16px)] rounded-lg p-2 shadow-lg bg-stone-50",
         "md:w-auto md:left-1/2 md:-translate-x-1/2 md:bottom-4 md:rounded-lg md:px-4 md:py-2",
       )}

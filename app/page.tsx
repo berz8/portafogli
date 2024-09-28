@@ -8,11 +8,11 @@ export default async function Home() {
     redirect("/dashboard");
   }
   return (
-    <div className="flex flex-col gap-8 items-center justify-center min-h-screen">
+    <div className="flex flex-col gap-8 items-center justify-center mt-60">
       <div className="w-44 md:w-60">
-        <img src="/icon.svg" alt="Portafogli - Icon" />
+        <img src="/icon.png" alt="Portafogli - Icon" />
       </div>
-      <h1 className="font-mono font-bold text-3xl uppercase text-center px-6">
+      <h1 className="font-mono font-bold text-3xl uppercase text-center text-primary px-6">
         The App to track all your expenses
       </h1>
       <form

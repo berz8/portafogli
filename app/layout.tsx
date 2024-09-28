@@ -39,8 +39,8 @@ export default function RootLayout({
             geistMono.variable,
             jura.variable,
             "antialiased",
-            "bg-gradient-to-br from-stone-50 via-stone-300 to-stone-200",
-            "min-h-screen",
+            "bg-primary-foreground",
+            "min-h-full",
           )}
         >
           {children}
