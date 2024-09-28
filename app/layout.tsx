@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ViewTransitions } from "next-view-transitions";
 import type { Viewport } from "next";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -49,6 +50,7 @@ export default function RootLayout({
           )}
         >
           {children}
+          <Toaster invert={true} className="mb-12" />
         </body>
       </html>
     </ViewTransitions>

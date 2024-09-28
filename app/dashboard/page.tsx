@@ -1,17 +1,19 @@
 import { auth } from "@/auth";
-import { db } from "@/db";
-import { expenses } from "@/db/schema/expenses";
 import { cn } from "@/lib/utils";
-import { and, desc, eq, gte, lt } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { Link } from "next-view-transitions";
 import { ArrowRight } from "lucide-react";
+import { getCurrentMonthExpenses } from "../actions/expenses";
 
 export default async function Dashboard() {
   const session = await auth();
   if (!session || !session.user?.id) redirect("/");
-  const currentMonthExpenses = await getCurrentMonthExpenses(session.user.id);
+
+  const currentMonthExpenses = await getCurrentMonthExpenses(
+    startOfMonth(new Date()),
+    endOfMonth(new Date()),
+  );
 
   return (
     <div>
@@ -64,24 +66,4 @@ export default async function Dashboard() {
       </Link>
     </div>
   );
-}
-
-async function getCurrentMonthExpenses(userId: string) {
-  const startDate = startOfMonth(new Date());
-  const endDate = endOfMonth(new Date());
-
-  const result = await db
-    .select()
-    .from(expenses)
-    .where(
-      and(
-        eq(expenses.userId, userId),
-        gte(expenses.date, startDate),
-        lt(expenses.date, endDate),
-      ),
-    )
-    .orderBy(desc(expenses.date))
-    .execute();
-
-  return result;
 }

@@ -15,6 +15,8 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { addExpenseAction } from "@/app/actions/expenses";
+import { toast } from "sonner";
 
 export const newExpenseFormSchema = z.object({
   amount: z.number().gt(0),
@@ -24,11 +26,7 @@ export const newExpenseFormSchema = z.object({
   currency: z.string(),
 });
 
-export default function FormExpense({
-  addExpenseAction,
-}: {
-  addExpenseAction: (data: z.infer<typeof newExpenseFormSchema>) => void;
-}) {
+export default function FormExpense() {
   const form = useForm<z.infer<typeof newExpenseFormSchema>>({
     resolver: zodResolver(newExpenseFormSchema),
     defaultValues: {
@@ -43,7 +41,12 @@ export default function FormExpense({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit((data) => addExpenseAction(data))}
+        onSubmit={form.handleSubmit((data) =>
+          toast.promise(addExpenseAction(data), {
+            success: "Item Added",
+            error: "Something went wrong",
+          }),
+        )}
         className="space-y-8 mt-4"
       >
         <FormField
