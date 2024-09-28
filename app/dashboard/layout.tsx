@@ -16,8 +16,12 @@ export default async function DashboadLayout({
   return (
     <div className="relative">
       <Navigation />
-      <div className="text-center mb-2">
-        <h1 className="font-black py-1">PORTAFOGLI</h1>
+      <div className="mb-2 py-2 flex justify-around">
+        <img
+          className="w-8"
+          src="/icon-dollar-dark.svg"
+          alt="Portafogli - Logo"
+        />
       </div>
       <div className="md:w-2/3 mx-auto px-4">{children}</div>
     </div>

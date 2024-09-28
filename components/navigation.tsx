@@ -19,28 +19,32 @@ export default function Navigation() {
         href="/dashboard"
         className={cn(
           "px-4 block py-1",
-          currentPath === "/dashboard" && "text-green-700",
+          currentPath === "/dashboard" ? "text-zinc-900" : "text-zinc-400",
         )}
       >
-        <Home className="w-5 h-5" />
+        <Home className="w-5 h-5" strokeWidth={2.7} />
       </Link>
       <Link
         href="/dashboard/new-expense"
         className={cn(
           "px-4 block py-1",
-          currentPath === "/new-expense" && "text-green-700",
+          currentPath === "/dashboard/new-expense"
+            ? "text-zinc-900"
+            : "text-zinc-400",
         )}
       >
-        <CirclePlus className="w-5 h-5" />
+        <CirclePlus className="w-5 h-5" strokeWidth={2.7} />
       </Link>
       <Link
         href="/dashboard/settings"
         className={cn(
           "px-4 block py-1",
-          currentPath === "/dashboard/settings" && "text-green-700",
+          currentPath === "/dashboard/settings"
+            ? "text-zinc-900"
+            : "text-zinc-400",
         )}
       >
-        <Settings className="w-5 h-5" />
+        <Settings className="w-5 h-5" strokeWidth={2.7} />
       </Link>
     </div>
   );
