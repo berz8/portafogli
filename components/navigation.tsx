@@ -12,7 +12,7 @@ export default function Navigation() {
     <div className="fixed z-10 bottom-0 left-0 flex justify-around w-full bg-primary-foreground md:bg-transparent">
       <div
         className={cn(
-          "m-3 mb-[CALC(0.5rem_+_env(safe-area-inset-bottom))] w-full",
+          "m-3 mb-[CALC(0.3rem_+_env(safe-area-inset-bottom))] w-full",
           "flex justify-around items-center rounded-lg p-2",
           "md:w-auto md:bottom-4 md:rounded-lg md:px-4 md:py-2 md:bg-white md:shadow-xl md:gap-5",
         )}
