@@ -124,7 +124,7 @@ export default function FormExpense() {
                     if (Number(event.target.value) || event.target.value === "")
                       field.onChange(event.target.value);
                   }}
-                  inputMode="numeric"
+                  inputMode="decimal"
                 />
               </FormControl>
               <FormMessage />
