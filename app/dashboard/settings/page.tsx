@@ -21,7 +21,7 @@ export default async function Settings() {
     <div>
       <Card>
         <CardHeader>
-          <CardTitle>Settings</CardTitle>
+          <CardTitle className="text-center">Settings</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex gap-4 items-center">

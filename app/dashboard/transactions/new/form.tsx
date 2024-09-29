@@ -121,8 +121,11 @@ export default function FormExpense() {
                   className="text-right"
                   {...field}
                   onChange={(event) => {
-                    if (Number(event.target.value) || event.target.value === "")
-                      field.onChange(event.target.value);
+                    if (
+                      Number(event.target.value.replace(",", ".")) ||
+                      event.target.value === ""
+                    )
+                      field.onChange(event.target.value.replace(",", "."));
                   }}
                   inputMode="decimal"
                 />
