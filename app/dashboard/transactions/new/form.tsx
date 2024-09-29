@@ -34,7 +34,7 @@ export const newExpenseFormSchema = z.object({
   currency: z.string(),
 });
 
-export default function FormExpense() {
+export default function FormExpense({ userId }: { userId: string }) {
   const form = useForm<z.infer<typeof newExpenseFormSchema>>({
     resolver: zodResolver(newExpenseFormSchema),
     defaultValues: {
@@ -50,7 +50,7 @@ export default function FormExpense() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) =>
-          toast.promise(addExpenseAction(data), {
+          toast.promise(addExpenseAction(data, userId), {
             success: "Item Added",
             error: "Something went wrong",
           }),

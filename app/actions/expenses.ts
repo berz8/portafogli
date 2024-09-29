@@ -38,14 +38,13 @@ export async function getExpenses(startDate: Date, endDate: Date) {
 
 export async function addExpenseAction(
   data: z.infer<typeof newExpenseFormSchema>,
+  userId: string,
 ) {
   try {
-    const session = await auth();
-    if (!session) redirect("/");
     const expense = newExpenseSchema.parse(data);
     await db.insert(expenses).values({
       ...expense,
-      userId: session?.user?.id,
+      userId,
     });
   } catch (err: unknown) {
     console.log(err);
