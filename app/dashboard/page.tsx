@@ -61,6 +61,7 @@ export default async function Dashboard() {
       </div>
       <Link
         href="/dashboard/transactions/all"
+        prefetch={true}
         className="mt-2 flex gap-3 justify-center items-center w-full"
       >
         <span>See all</span>
