@@ -187,7 +187,7 @@ export default function FormExpense() {
             </FormItem>
           )}
         />
-        <div className="fixed bottom-[CALC(2.7rem_+_env(safe-area-inset-bottom))] left-0 px-4 w-full">
+        <div className="fixed bottom-[CALC(2.9rem_+_env(safe-area-inset-bottom))] left-0 px-4 w-full">
           <div className="relative">
             <svg
               className="w-full h-4 text-[#F6F6F6]"

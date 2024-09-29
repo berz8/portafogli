@@ -19,7 +19,7 @@ export default async function Settings() {
 
   return (
     <div>
-      <Card>
+      <Card className="light-metal-gradient shadow-xl border-none">
         <CardHeader>
           <CardTitle className="text-center">Settings</CardTitle>
         </CardHeader>
@@ -44,7 +44,7 @@ export default async function Settings() {
           });
         }}
       >
-        <Button variant="outline" className="w-full" type="submit">
+        <Button className="w-full" type="submit">
           Sign Out
         </Button>
       </form>
