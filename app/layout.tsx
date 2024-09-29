@@ -25,10 +25,6 @@ const jura = Jura({
 export const metadata: Metadata = {
   title: "Portafogli",
   description: "The app to track all your expenses",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-  },
 };
 
 export const viewport: Viewport = {
