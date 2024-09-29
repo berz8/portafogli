@@ -18,7 +18,8 @@ export default async function Home() {
         y={-1}
         strokeDasharray={"4 2"}
         className={cn(
-          "[mask-image:radial-gradient(900px_circle_at_center,#f6f6f6,transparent)]",
+          "[mask-image:radial-gradient(450px_circle_at_center,#e2ece9,transparent)]",
+          "md:[mask-image:radial-gradient(700px_circle_at_center,#e2ece9,transparent)]",
           "z-[-1]",
         )}
       />
@@ -32,7 +33,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <h1 className="font-mono font-bold text-3xl uppercase text-center text-primary px-6">
+      <h1 className="font-bold text-3xl uppercase text-center text-primary px-6">
         The easiest way to track your money
       </h1>
       <form

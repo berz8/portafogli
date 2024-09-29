@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { cn } from "@/lib/utils";
+import { cn, getFormattedNumber } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { Link } from "next-view-transitions";
@@ -18,17 +18,17 @@ export default async function Dashboard() {
   return (
     <div>
       <div className="rounded-xl dark-metal-gradient p-4 text-right shadow-lg">
-        <div className="text-[3.3rem] leading-[3rem] font-mono font-semibold text-primary-foreground">
+        <div className="light-metal-text text-[3.3rem] leading-[3rem] font-mono font-semibold text-primary-foreground">
           €{" "}
-          {currentMonthExpenses
-            .reduce((acc, item) => {
+          {getFormattedNumber(
+            currentMonthExpenses.reduce((acc, item) => {
               if (item.type === "in") {
                 return acc + Number(item.amount);
               } else {
                 return acc - Number(item.amount);
               }
-            }, 0)
-            .toFixed(2)}
+            }, 0),
+          )}
         </div>
         <div className="text-primary-foreground opacity-70">
           Current Month Balance
@@ -40,13 +40,15 @@ export default async function Dashboard() {
           <div
             key={item.id}
             className={cn(
-              "p-1 pl-2 font-mono flex justify-between",
-              i % 2 === 0 && "bg-gray-200",
+              "p-1 pl-2 font-mono flex justify-between rounded-md",
+              i % 2 === 0 && "bg-[#F2F2F1]",
             )}
           >
-            <div>€ {item.amount}</div>
             <div className="flex">
               <div>{item.description}</div>
+            </div>
+            <div className="flex">
+              <span> € {getFormattedNumber(item.amount)}</span>
               <div
                 className={cn(
                   "h-full w-1 rounded-md ml-2",
