@@ -4,13 +4,13 @@ import { redirect } from "next/navigation";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { Link } from "next-view-transitions";
 import { ArrowRight } from "lucide-react";
-import { getCurrentMonthExpenses } from "../actions/expenses";
+import { getExpenses } from "../actions/expenses";
 
 export default async function Dashboard() {
   const session = await auth();
   if (!session || !session.user?.id) redirect("/");
 
-  const currentMonthExpenses = await getCurrentMonthExpenses(
+  const currentMonthExpenses = await getExpenses(
     startOfMonth(new Date()),
     endOfMonth(new Date()),
   );
@@ -34,7 +34,7 @@ export default async function Dashboard() {
           Current Month Balance
         </div>
       </div>
-      <h3 className="my-4 font-bold text-gray-600">Recent expenses</h3>
+      <h3 className="my-4 font-bold text-gray-600">Recent transactions</h3>
       <div className="flex flex-col gap-1">
         {currentMonthExpenses.slice(0, 6).map((item, i) => (
           <div
@@ -60,7 +60,7 @@ export default async function Dashboard() {
         ))}
       </div>
       <Link
-        href="/dashboard/expenses/all"
+        href="/dashboard/transactions/all"
         className="mt-2 flex gap-3 justify-center items-center w-full"
       >
         <span>See all</span>

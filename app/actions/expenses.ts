@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { newExpenseFormSchema } from "../dashboard/new-expense/form";
+import { newExpenseFormSchema } from "../dashboard/transactions/new/form";
 import { db } from "@/db";
 import { expenses } from "@/db/schema/expenses";
 import { redirect } from "next/navigation";
@@ -16,7 +16,7 @@ const newExpenseSchema = z.object({
   currency: z.string(),
 });
 
-export async function getCurrentMonthExpenses(startDate: Date, endDate: Date) {
+export async function getExpenses(startDate: Date, endDate: Date) {
   const session = await auth();
   if (!session?.user?.id) redirect("/");
 

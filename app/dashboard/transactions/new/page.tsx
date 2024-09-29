@@ -1,9 +1,11 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import FormExpense from "./form";
+import BackButton from "@/components/backButton";
 
 export default async function NewExpense() {
   return (
     <div>
+      <BackButton href="/dashboard" />
       <div className="relative">
         <svg
           className="w-full h-4 text-[#F6F6F6]"

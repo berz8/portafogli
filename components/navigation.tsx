@@ -9,7 +9,7 @@ export default function Navigation() {
   const currentPath = usePathname();
 
   return (
-    <div className="fixed bottom-0 left-0 flex justify-around w-full bg-primary-foreground md:bg-transparent">
+    <div className="fixed z-10 bottom-0 left-0 flex justify-around w-full bg-primary-foreground md:bg-transparent">
       <div
         className={cn(
           "m-3 mb-[CALC(0.5rem_+_env(safe-area-inset-bottom))] w-full",
@@ -28,10 +28,10 @@ export default function Navigation() {
           <Home className="w-5 h-5" strokeWidth={2.7} />
         </Link>
         <Link
-          href="/dashboard/new-expense"
+          href="/dashboard/transactions/new"
           className={cn(
             "px-4 block py-1",
-            currentPath === "/dashboard/new-expense"
+            currentPath === "/dashboard/transactions/new"
               ? "text-primary"
               : "text-zinc-400",
           )}
