@@ -24,7 +24,9 @@ export default async function DashboadLayout({
           $
         </div>
       </div>
-      <div className="md:w-2/3 mx-auto  mt-[58px] px-4">{children}</div>
+      <div className="md:w-2/3 mx-auto mt-[58px] mb-[61px] px-4">
+        {children}
+      </div>
     </div>
   );
 }
