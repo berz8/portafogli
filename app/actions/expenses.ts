@@ -8,6 +8,14 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { and, desc, eq, gte, lt } from "drizzle-orm";
 
+const newExpenseSchema = z.object({
+  amount: z.coerce.number().gt(0),
+  type: z.enum(["in", "out"]),
+  date: z.date(),
+  description: z.string().min(1).max(100),
+  currency: z.string(),
+});
+
 export async function getCurrentMonthExpenses(startDate: Date, endDate: Date) {
   const session = await auth();
   if (!session?.user?.id) redirect("/");
@@ -34,8 +42,9 @@ export async function addExpenseAction(
   try {
     const session = await auth();
     if (!session) redirect("/");
+    const expense = newExpenseSchema.parse(data);
     await db.insert(expenses).values({
-      ...data,
+      ...expense,
       userId: session?.user?.id,
     });
   } catch (err: unknown) {
