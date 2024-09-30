@@ -1,13 +1,8 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import FormExpense from "./form";
 import BackButton from "@/components/backButton";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 
 export default async function NewExpense() {
-  const session = await auth();
-  if (!session?.user?.id) redirect("/");
-
   return (
     <div>
       <BackButton href="/dashboard" />
@@ -30,7 +25,7 @@ export default async function NewExpense() {
           </CardHeader>
         </Card>
       </div>
-      <FormExpense userId={session.user.id} />
+      <FormExpense />
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { auth, signIn } from "@/auth";
-import { redirect } from "next/navigation";
 import GridPattern from "@/components/ui/grid-pattern";
 import { cn } from "@/lib/utils";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const session = await auth();
-  if (session) {
-    redirect("/dashboard");
-  }
+  const session = auth();
+  if (session.userId) redirect("/dashboard");
+
   return (
     <div className="flex flex-col gap-8 items-center justify-center mt-60">
       <GridPattern
@@ -36,16 +36,18 @@ export default async function Home() {
       <h1 className="font-bold text-3xl uppercase text-center text-primary px-6">
         The easiest way to track your money
       </h1>
-      <form
-        action={async () => {
-          "use server";
-          await signIn("google");
-        }}
-      >
-        <Button type="submit" className="font-mono px-12 font-semibold text-md">
-          SignIn with Google
-        </Button>
-      </form>
+      <div className="flex flex-col gap-2">
+        <SignUpButton>
+          <Button className="font-mono px-12 font-semibold text-md">
+            Sign Up
+          </Button>
+        </SignUpButton>
+        <SignInButton>
+          <button className="text-sm">
+            Already have an account? <span className="underline">Sign In</span>
+          </button>
+        </SignInButton>
+      </div>
     </div>
   );
 }

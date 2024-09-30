@@ -1,12 +1,12 @@
 "use server";
 
-import { auth } from "@/auth";
 import { newExpenseFormSchema } from "../dashboard/transactions/new/form";
 import { db } from "@/db";
 import { expenses } from "@/db/schema/expenses";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { and, desc, eq, gte, lt } from "drizzle-orm";
+import { auth } from "@clerk/nextjs/server";
 
 const newExpenseSchema = z.object({
   amount: z.coerce.number().gt(0),
@@ -17,15 +17,15 @@ const newExpenseSchema = z.object({
 });
 
 export async function getExpenses(startDate: Date, endDate: Date) {
-  const session = await auth();
-  if (!session?.user?.id) redirect("/");
+  const { userId }: { userId: string | null } = auth();
+  if (!userId) throw new Error("Couldn't retrieve userId");
 
   const result = await db
     .select()
     .from(expenses)
     .where(
       and(
-        eq(expenses.userId, session.user.id),
+        eq(expenses.userId, userId),
         gte(expenses.date, startDate),
         lt(expenses.date, endDate),
       ),
@@ -38,8 +38,10 @@ export async function getExpenses(startDate: Date, endDate: Date) {
 
 export async function addExpenseAction(
   data: z.infer<typeof newExpenseFormSchema>,
-  userId: string,
 ) {
+  const { userId }: { userId: string | null } = auth();
+  if (!userId) throw new Error("Couldn't retrieve userId");
+
   try {
     const expense = newExpenseSchema.parse(data);
     await db.insert(expenses).values({

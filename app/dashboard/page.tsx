@@ -1,15 +1,10 @@
-import { auth } from "@/auth";
 import { cn, getFormattedNumber } from "@/lib/utils";
-import { redirect } from "next/navigation";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { Link } from "next-view-transitions";
 import { ArrowRight } from "lucide-react";
 import { getExpenses } from "../actions/expenses";
 
 export default async function Dashboard() {
-  const session = await auth();
-  if (!session || !session.user?.id) redirect("/");
-
   const currentMonthExpenses = await getExpenses(
     startOfMonth(new Date()),
     endOfMonth(new Date()),

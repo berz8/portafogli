@@ -1,1 +1,0 @@
-ALTER TABLE `expenses` ADD `type` text DEFAULT 'out' NOT NULL;

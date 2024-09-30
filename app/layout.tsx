@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Jura } from "next/font/google";
@@ -37,22 +38,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="en">
-        <body
-          className={cn(
-            geistSans.variable,
-            geistMono.variable,
-            jura.variable,
-            "antialiased",
-            "bg-primary-foreground",
-            "min-h-full",
-          )}
-        >
-          {children}
-          <Toaster invert={true} className="mb-12" />
-        </body>
-      </html>
-    </ViewTransitions>
+    <ClerkProvider>
+      <ViewTransitions>
+        <html lang="en">
+          <body
+            className={cn(
+              geistSans.variable,
+              geistMono.variable,
+              jura.variable,
+              "antialiased",
+              "bg-primary-foreground",
+              "min-h-full",
+            )}
+          >
+            {children}
+            <Toaster
+              className="mb-12"
+              toastOptions={{
+                classNames: {
+                  toast: "dark-metal-gradient text-white",
+                },
+              }}
+            />
+          </body>
+        </html>
+      </ViewTransitions>
+    </ClerkProvider>
   );
 }

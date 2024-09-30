@@ -20,10 +20,6 @@ export const categories = sqliteTable("categories", {
 });
 
 // Relationships
-export const categoriesRelations = relations(categories, ({ many, one }) => ({
+export const categoriesRelations = relations(categories, ({ many }) => ({
   expenses: many(expenses),
-  user: one(users, {
-    fields: [categories.userId],
-    references: [users.id],
-  }),
 }));

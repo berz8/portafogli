@@ -1,6 +1,5 @@
 import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
-import { users } from "./users";
 import { categories } from "./categories";
 
 // Expenses table
@@ -11,7 +10,7 @@ export const expenses = sqliteTable("expenses", {
   currency: text("currency").notNull(),
   date: integer("date", { mode: "timestamp" }).notNull(),
   categoryId: integer("category_id").references(() => categories.id),
-  userId: text("user_id").references(() => users.id), // Assuming you have a users table
+  userId: text("user_id"),
   paymentMethod: text("payment_method"),
   location: text("location"),
   notes: text("notes"),
@@ -19,9 +18,9 @@ export const expenses = sqliteTable("expenses", {
   isRecurring: integer("is_recurring", { mode: "boolean" })
     .notNull()
     .default(false),
-  recurrenceFrequency: text("recurrence_frequency"), // New field for recurrence frequency
-  recurrenceInterval: integer("recurrence_interval"), // New field for recurrence interval
-  nextRecurrenceDate: integer("next_recurrence_date", { mode: "timestamp" }), // New field for next recurrence
+  recurrenceFrequency: text("recurrence_frequency"),
+  recurrenceInterval: integer("recurrence_interval"),
+  nextRecurrenceDate: integer("next_recurrence_date", { mode: "timestamp" }),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
@@ -34,9 +33,5 @@ export const expensesRelations = relations(expenses, ({ one }) => ({
   category: one(categories, {
     fields: [expenses.categoryId],
     references: [categories.id],
-  }),
-  user: one(users, {
-    fields: [expenses.userId],
-    references: [users.id],
   }),
 }));
