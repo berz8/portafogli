@@ -16,7 +16,7 @@ export default async function DashboadLayout({
           $
         </div>
       </div>
-      <div className="md:w-2/3 mx-auto mt-[58px] mb-[CALC(60px_+_env(safe-area-inset-bottom))] px-4">
+      <div className="md:w-3/5 lg:w-1/2 mx-auto mt-[58px] mb-[CALC(60px_+_env(safe-area-inset-bottom))] px-4">
         {children}
       </div>
     </div>

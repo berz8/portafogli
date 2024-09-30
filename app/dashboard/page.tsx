@@ -12,7 +12,7 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <div className="rounded-xl dark-metal-gradient p-4 text-right shadow-lg">
+      <div className="rounded-xl dark-metal-gradient p-4 text-right shadow-xl">
         <div className="light-metal-text text-[3.3rem] leading-[3rem] font-mono font-semibold text-primary-foreground">
           €{" "}
           {getFormattedNumber(

@@ -82,6 +82,22 @@ body {
 .dark-metal-gradient {
   background: rgb(39, 39, 42);
   background: linear-gradient(135deg, rgba(39, 39, 42, 1) 0%, rgba(65, 65, 73, 1) 22%, rgba(80, 80, 90, 1) 32%, rgba(68, 68, 78, 1) 40%, rgba(60, 60, 68, 1) 58%, rgba(68, 68, 77, 1) 70%, rgba(46, 46, 52, 1) 77%, rgba(24, 24, 27, 1) 100%);
+  background-size: 150% 150%;
+  animation: reflection 10s ease-in-out infinite;
+}
+
+@keyframes reflection {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .light-metal-gradient {
@@ -94,6 +110,8 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-size: 130% 130%;
+  animation: reflection 10s ease-in-out infinite;
 }
 
 .dark-metal-text {

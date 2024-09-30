@@ -86,7 +86,7 @@ export default function FormExpense() {
                       htmlFor="r1"
                       className="w-full mt-0 text-center px-3 py-2 rounded-md text-sm font-medium transition-all peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground cursor-pointer"
                     >
-                      Outgoing
+                      Expense
                     </FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center grow space-y-0">
@@ -101,7 +101,7 @@ export default function FormExpense() {
                       htmlFor="r2"
                       className="w-full m-0 text-center px-3 py-2 rounded-md text-sm font-medium transition-all peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground cursor-pointer"
                     >
-                      Incoming
+                      Income
                     </FormLabel>
                   </FormItem>
                 </RadioGroup>
@@ -187,7 +187,13 @@ export default function FormExpense() {
             </FormItem>
           )}
         />
-        <div className="fixed bottom-[CALC(2.9rem_+_env(safe-area-inset-bottom))] px-4 left-0 w-full">
+        <div
+          className={cn(
+            "fixed bottom-[CALC(2.9rem_+_env(safe-area-inset-bottom))] px-4 left-0 w-full",
+            "md:bottom-[CALC(3.3rem_+_env(safe-area-inset-bottom))] md:w-2/3 md:left-1/2 md:-translate-x-1/2",
+            "lg:w-1/2",
+          )}
+        >
           <div className="drop-shadow-[0_-8px_3px_rgba(150,150,150,0.05)] px-4 -mx-4">
             <div className="relative">
               <svg
