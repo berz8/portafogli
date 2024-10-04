@@ -1,8 +1,9 @@
 import { cn, getFormattedNumber } from "@/lib/utils";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { Link } from "next-view-transitions";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import { getExpenses } from "../actions/expenses";
+import { Button } from "@/components/ui/button";
 
 export default async function Dashboard() {
   const currentMonthExpenses = await getExpenses(
@@ -54,14 +55,26 @@ export default async function Dashboard() {
           </div>
         ))}
       </div>
-      <Link
-        href="/dashboard/transactions/all"
-        prefetch={true}
-        className="mt-2 flex gap-3 justify-center items-center w-full"
-      >
-        <span>See all</span>
-        <ArrowRight className="w-4 h-4" />
-      </Link>
+      {currentMonthExpenses.length > 0 ? (
+        <Link
+          href="/dashboard/transactions/all"
+          prefetch={true}
+          className="mt-2 flex gap-3 justify-center items-center w-full"
+        >
+          <span>See all</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      ) : (
+        <Button variant="outline" asChild className="w-full">
+          <Link
+            href="/dashboard/transactions/new"
+            className="flex gap-3 justify-center items-center w-full"
+          >
+            <span>Add your first transaction</span>
+            <Plus className="w-4 h-4" />
+          </Link>
+        </Button>
+      )}
     </div>
   );
 }
