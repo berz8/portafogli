@@ -2,9 +2,24 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
+import { addUser, getUser } from "@/app/actions/user";
 
 export default async function Settings() {
-  const user = await currentUser();
+  // save user to db to avoid calling Clerk api every time
+  let user = await getUser();
+  if (!user) {
+    const clerkUser = await currentUser();
+    if (clerkUser) {
+      user = {
+        id: clerkUser.id,
+        firstName: clerkUser.firstName || "",
+        lastName: clerkUser.lastName ?? "",
+        email: clerkUser.primaryEmailAddress?.emailAddress ?? "",
+        imageUrl: clerkUser.imageUrl,
+      };
+      await addUser(user);
+    }
+  }
 
   return (
     <div>
@@ -19,9 +34,7 @@ export default async function Settings() {
             </div>
             <div>
               <h3 className="font-semibold">{`${user?.firstName} ${user?.lastName}`}</h3>
-              <div className="text-stone-800">
-                {user?.primaryEmailAddress?.emailAddress}
-              </div>
+              <div className="text-stone-800">{user?.email}</div>
             </div>
           </div>
         </CardContent>
