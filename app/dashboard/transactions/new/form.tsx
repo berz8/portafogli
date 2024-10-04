@@ -116,20 +116,23 @@ export default function FormExpense() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Amount</FormLabel>
-              <FormControl>
-                <Input
-                  className="text-right"
-                  {...field}
-                  onChange={(event) => {
-                    if (
-                      Number(event.target.value.replace(",", ".")) ||
-                      event.target.value === ""
-                    )
-                      field.onChange(event.target.value.replace(",", "."));
-                  }}
-                  inputMode="decimal"
-                />
-              </FormControl>
+              <div className="flex gap-3">
+                <div className="text-3xl font-mono">€</div>
+                <FormControl>
+                  <Input
+                    className="text-right text-xl"
+                    {...field}
+                    onChange={(event) => {
+                      if (
+                        Number(event.target.value.replace(",", ".")) ||
+                        event.target.value === ""
+                      )
+                        field.onChange(event.target.value.replace(",", "."));
+                    }}
+                    inputMode="decimal"
+                  />
+                </FormControl>
+              </div>
               <FormMessage />
             </FormItem>
           )}
