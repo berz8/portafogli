@@ -5,7 +5,7 @@ import { db } from "@/db";
 import { expenses } from "@/db/schema/expenses";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { and, desc, eq, gte, lt } from "drizzle-orm";
+import { and, desc, eq, gte, lt, asc } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 
 const newExpenseSchema = z.object({
@@ -16,9 +16,20 @@ const newExpenseSchema = z.object({
   currency: z.string(),
 });
 
-export async function getExpenses(startDate: Date, endDate: Date) {
+export async function getExpenses(
+  startDate: Date,
+  endDate: Date,
+  sort: unknown,
+) {
   const { userId }: { userId: string | null } = auth();
   if (!userId) throw new Error("Couldn't retrieve userId");
+
+  const sortSchema = z.tuple([
+    z.enum(["date", "amount"]).default("date"),
+    z.enum(["asc", "desc"]).default("desc"),
+  ]);
+
+  const [sortBy, sortDirection] = sortSchema.parse(sort);
 
   const result = await db
     .select()
@@ -30,7 +41,9 @@ export async function getExpenses(startDate: Date, endDate: Date) {
         lt(expenses.date, endDate),
       ),
     )
-    .orderBy(desc(expenses.date))
+    .orderBy(
+      sortDirection === "asc" ? asc(expenses[sortBy]) : desc(expenses[sortBy]),
+    )
     .execute();
 
   return result;

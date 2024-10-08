@@ -3,11 +3,17 @@ import BackButton from "@/components/backButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, getFormattedNumber } from "@/lib/utils";
 import { endOfMonth, format, startOfMonth } from "date-fns";
+import { AllTransctionFilters } from "./filters";
 
-export default async function NewTransactionPage() {
+export default async function NewTransactionPage({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const expenses = await getExpenses(
     startOfMonth(new Date()),
     endOfMonth(new Date()),
+    searchParams?.["sort"]?.toString().split("-") ?? ["date", "desc"],
   );
 
   return (
@@ -18,7 +24,7 @@ export default async function NewTransactionPage() {
           <CardTitle className="text-center">Transactions List</CardTitle>
         </CardHeader>
       </Card>
-      <div className="rounded-xl mb-4 dark-metal-gradient px-4 py-3 text-right shadow-lg flex justify-between items-center">
+      <div className="rounded-xl dark-metal-gradient px-4 py-3 text-right shadow-lg flex justify-between items-center">
         <div className="text-primary-foreground text-lg opacity-70">
           {format(new Date(), "MMM yy")}
         </div>
@@ -35,6 +41,7 @@ export default async function NewTransactionPage() {
           )}
         </div>
       </div>
+      <AllTransctionFilters />
       <div className="flex flex-col flex-1 gap-1">
         {expenses.map((item, i) => (
           <div

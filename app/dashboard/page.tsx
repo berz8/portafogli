@@ -9,6 +9,7 @@ export default async function Dashboard() {
   const currentMonthExpenses = await getExpenses(
     startOfMonth(new Date()),
     endOfMonth(new Date()),
+    ["date", "desc"],
   );
 
   return (
