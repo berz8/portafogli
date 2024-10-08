@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowUpDown } from "lucide-react";
 
-export function AllTransctionFilters() {
+export function AllTransactionsFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 

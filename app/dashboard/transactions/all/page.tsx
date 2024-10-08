@@ -3,7 +3,8 @@ import BackButton from "@/components/backButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, getFormattedNumber } from "@/lib/utils";
 import { endOfMonth, format, startOfMonth } from "date-fns";
-import { AllTransctionFilters } from "./filters";
+import { AllTransactionsFilters } from "./filters";
+import TotalCard from "./totalCard";
 
 export default async function NewTransactionPage({
   searchParams,
@@ -24,24 +25,18 @@ export default async function NewTransactionPage({
           <CardTitle className="text-center">Transactions List</CardTitle>
         </CardHeader>
       </Card>
-      <div className="rounded-xl dark-metal-gradient px-4 py-3 text-right shadow-lg flex justify-between items-center">
-        <div className="text-primary-foreground text-lg opacity-70">
-          {format(new Date(), "MMM yy")}
-        </div>
-        <div className="light-metal-text text-2xl font-mono font-semibold text-primary-foreground">
-          €{" "}
-          {getFormattedNumber(
-            expenses.reduce((acc, item) => {
-              if (item.type === "in") {
-                return acc + Number(item.amount);
-              } else {
-                return acc - Number(item.amount);
-              }
-            }, 0),
-          )}
-        </div>
-      </div>
-      <AllTransctionFilters />
+      <TotalCard
+        total={getFormattedNumber(
+          expenses.reduce((acc, item) => {
+            if (item.type === "in") {
+              return acc + Number(item.amount);
+            } else {
+              return acc - Number(item.amount);
+            }
+          }, 0),
+        )}
+      />
+      <AllTransactionsFilters />
       <div className="flex flex-col flex-1 gap-1">
         {expenses.map((item, i) => (
           <div
