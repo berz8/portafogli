@@ -11,9 +11,21 @@ export default async function NewTransactionPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
+  const currentDate = new Date();
+  const year = parseInt(
+    searchParams?.["year"]?.toString() ?? currentDate.getFullYear().toString(),
+  );
+  const month = parseInt(
+    searchParams?.["month"]?.toString() ??
+      (currentDate.getMonth() + 1).toString(),
+  );
+
+  const startDate = new Date(year, month - 1, 1); // month is 0-indexed in Date constructor
+  const endDate = new Date(year, month, 0); // Last day of the month
+
   const expenses = await getExpenses(
-    startOfMonth(new Date()),
-    endOfMonth(new Date()),
+    startOfMonth(startDate),
+    endOfMonth(endDate),
     searchParams?.["sort"]?.toString().split("-") ?? ["date", "desc"],
   );
 
