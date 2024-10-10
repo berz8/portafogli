@@ -1,8 +1,10 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import FormExpense from "./form";
 import BackButton from "@/components/backButton";
+import { getCategories } from "@/app/actions/categories";
 
 export default async function NewExpense() {
+  const categories = await getCategories();
   return (
     <div>
       <BackButton href="/dashboard" />
@@ -25,7 +27,7 @@ export default async function NewExpense() {
           </CardHeader>
         </Card>
       </div>
-      <FormExpense />
+      <FormExpense categories={categories} />
     </div>
   );
 }

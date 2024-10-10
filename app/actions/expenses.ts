@@ -14,6 +14,7 @@ const newExpenseSchema = z.object({
   date: z.date(),
   description: z.string().min(1).max(100),
   currency: z.string(),
+  categoryId: z.number().nullable(),
 });
 
 export async function getExpenses(

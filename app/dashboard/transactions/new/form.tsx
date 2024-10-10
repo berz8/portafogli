@@ -20,6 +20,13 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { addExpenseAction } from "@/app/actions/expenses";
 import { toast } from "sonner";
@@ -32,9 +39,14 @@ export const newExpenseFormSchema = z.object({
   date: z.date(),
   description: z.string().min(1).max(100),
   currency: z.string(),
+  categoryId: z.number().nullable(),
 });
 
-export default function FormExpense() {
+export default function FormExpense({
+  categories,
+}: {
+  categories: Array<{ id: number; name: string; color: string | null }>;
+}) {
   const form = useForm<z.infer<typeof newExpenseFormSchema>>({
     resolver: zodResolver(newExpenseFormSchema),
     defaultValues: {
@@ -43,6 +55,7 @@ export default function FormExpense() {
       date: new Date(),
       description: "",
       currency: "euro",
+      categoryId: null,
     },
   });
 
@@ -186,6 +199,36 @@ export default function FormExpense() {
                   />
                 </PopoverContent>
               </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="categoryId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select
+                onValueChange={(value) => field.onChange(Number(value))}
+                defaultValue={field.value?.toString()}
+              >
+                <FormControl>
+                  <SelectTrigger className="bg-[#F6F6F6]">
+                    <SelectValue className="font-mono" placeholder="-" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem
+                      key={category.id}
+                      value={category.id.toString()}
+                    >
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

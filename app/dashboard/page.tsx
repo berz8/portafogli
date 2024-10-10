@@ -4,6 +4,7 @@ import { Link } from "next-view-transitions";
 import { ArrowRight, Plus } from "lucide-react";
 import { getExpenses } from "../actions/expenses";
 import { Button } from "@/components/ui/button";
+import { getCategories } from "../actions/categories";
 
 export default async function Dashboard() {
   const currentMonthExpenses = await getExpenses(
@@ -12,6 +13,55 @@ export default async function Dashboard() {
     ["date", "desc"],
   );
 
+  const userCategories = await getCategories();
+
+  const calculateCategoryExpenses = (
+    expenses: typeof currentMonthExpenses,
+    categories: typeof userCategories,
+  ) => {
+    const categoryExpenses = new Map();
+    categories.forEach((category) => categoryExpenses.set(category.id, 0));
+    categoryExpenses.set("uncategorized", 0);
+
+    expenses.forEach((expense) => {
+      if (expense.categoryId) {
+        categoryExpenses.set(
+          expense.categoryId,
+          expense.type === "in"
+            ? categoryExpenses.get(expense.categoryId) + Number(expense.amount)
+            : categoryExpenses.get(expense.categoryId) - Number(expense.amount),
+        );
+      } else {
+        categoryExpenses.set(
+          "uncategorized",
+          expense.type === "in"
+            ? categoryExpenses.get("uncategorized") + Number(expense.amount)
+            : categoryExpenses.get("uncategorized") - Number(expense.amount),
+        );
+      }
+    });
+
+    return categoryExpenses;
+  };
+
+  const categoryExpenses = calculateCategoryExpenses(
+    currentMonthExpenses,
+    userCategories,
+  );
+
+  const categoriesWithExpenses = [
+    ...userCategories.map((category) => ({
+      ...category,
+      amount: categoryExpenses.get(category.id),
+    })),
+    {
+      id: "uncategorized",
+      name: "Uncategorized",
+      color: "grey",
+      amount: categoryExpenses.get("uncategorized"),
+    },
+  ];
+
   return (
     <div>
       <div className="flex flex-col md:flex-row md:gap-4">
@@ -19,13 +69,10 @@ export default async function Dashboard() {
           <div className="light-metal-text text-[3.3rem] leading-[3rem] font-mono font-semibold text-primary-foreground">
             €{" "}
             {getFormattedNumber(
-              currentMonthExpenses.reduce((acc, item) => {
-                if (item.type === "in") {
-                  return acc + Number(item.amount);
-                } else {
-                  return acc - Number(item.amount);
-                }
-              }, 0),
+              categoriesWithExpenses.reduce(
+                (acc, item) => acc + item.amount,
+                0,
+              ),
             )}
           </div>
           <div className="text-primary-foreground opacity-70">
@@ -64,7 +111,7 @@ export default async function Dashboard() {
               prefetch={true}
               className="mt-2 flex gap-3 justify-center items-center w-full"
             >
-              <span>See all</span>
+              <span>See All</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           ) : (
@@ -79,6 +126,31 @@ export default async function Dashboard() {
             </Button>
           )}
         </div>
+      </div>
+      <div>
+        <h3 className="my-4 font-bold text-gray-600">Categories</h3>
+        <div className="flex flex-col">
+          {categoriesWithExpenses.map((cat) => (
+            <div key={cat.id} className="flex gap-3 py-1 items-center">
+              <div className="font-mono">{cat.name}</div>
+              <div
+                className="grow h-2 rounded-md"
+                style={{ background: cat.color || "gray" }}
+              />
+              <div className="font-mono text-right">
+                € {getFormattedNumber(cat.amount)}
+              </div>
+            </div>
+          ))}
+        </div>
+        <Link
+          href="/dashboard/categories/all"
+          prefetch={true}
+          className="mt-2 flex gap-3 justify-center items-center w-full"
+        >
+          <span>All Categories</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   );
