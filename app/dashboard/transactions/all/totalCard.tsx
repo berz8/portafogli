@@ -50,7 +50,7 @@ export default function TotalCard({ total }: { total: string }) {
           <motion.div
             animate={{ rotate: openFilter ? 180 : 0 }}
             transition={{ ease: "easeInOut", duration: 0.3 }}
-            className="p-1"
+            className="p-1 cursor-pointer"
             onClick={() => setOpenFilter(!openFilter)}
           >
             <ChevronDown className="w-4 h-4" />
