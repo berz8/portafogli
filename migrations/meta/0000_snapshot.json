@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "7854296c-f8d9-4848-8747-1891b1e2a554",
+  "id": "6a401fd9-b2d9-4adc-a39f-9f49c7f8e7a6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "categories": {
@@ -66,30 +66,8 @@
           "default": "CURRENT_TIMESTAMP"
         }
       },
-      "indexes": {
-        "categories_name_unique": {
-          "name": "categories_name_unique",
-          "columns": [
-            "name"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {
-        "categories_user_id_user_id_fk": {
-          "name": "categories_user_id_user_id_fk",
-          "tableFrom": "categories",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

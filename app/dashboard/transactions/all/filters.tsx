@@ -25,7 +25,7 @@ export function AllTransactionsFilters() {
         value={searchParams.get("sort") || "date-desc"}
         onValueChange={handleSortChange}
       >
-        <SelectTriggerClean className="w-auto border-none shadow-none">
+        <SelectTriggerClean className="w-auto border-none shadow-none focus:ring-0">
           <ArrowUpDown className="w-5 h-5" />
         </SelectTriggerClean>
         <SelectContent>

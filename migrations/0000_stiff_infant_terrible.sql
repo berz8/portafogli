@@ -6,8 +6,7 @@ CREATE TABLE `categories` (
 	`icon` text,
 	`user_id` text,
 	`created_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	`updated_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
+	`updated_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `expenses` (
@@ -39,5 +38,4 @@ CREATE TABLE `user` (
 	`image_url` text
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `categories_name_unique` ON `categories` (`name`);--> statement-breakpoint
 CREATE UNIQUE INDEX `user_email_unique` ON `user` (`email`);

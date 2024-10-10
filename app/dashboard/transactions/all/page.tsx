@@ -5,6 +5,7 @@ import { cn, getFormattedNumber } from "@/lib/utils";
 import { endOfMonth, format, startOfMonth } from "date-fns";
 import { AllTransactionsFilters } from "./filters";
 import TotalCard from "./totalCard";
+import { getCategories } from "@/app/actions/categories";
 
 export default async function NewTransactionPage({
   searchParams,
@@ -28,6 +29,8 @@ export default async function NewTransactionPage({
     endOfMonth(endDate),
     searchParams?.["sort"]?.toString().split("-") ?? ["date", "desc"],
   );
+
+  const categories = await getCategories();
 
   return (
     <div>
@@ -61,7 +64,9 @@ export default async function NewTransactionPage({
             <div className="flex flex-col gap-1">
               <div className="font-mono ">{item.description}</div>
               <div className="text-sm opacity-55">
-                {format(item.date, "dd MMM yyyy")}
+                {format(item.date, "dd MMM yyyy")} -{" "}
+                {categories.find((cat) => cat.id === item.categoryId)?.name ||
+                  "Uncategorized"}
               </div>
             </div>
             <div className="flex font-mono">
