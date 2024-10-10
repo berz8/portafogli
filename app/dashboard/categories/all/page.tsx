@@ -20,7 +20,7 @@ export default async function CategoriesAll() {
       </Button>
       <div className="flex flex-col gap-1 mt-3">
         {categories.map((cat) => (
-          <div className="flex flex-col gap-1 pt-1">
+          <div key={cat.id} className="flex flex-col gap-1 pt-1">
             <div className="font-mono">{cat.name}</div>
             <div
               className="h-2 w-full rounded-md"
