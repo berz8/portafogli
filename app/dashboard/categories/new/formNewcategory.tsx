@@ -14,13 +14,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { addCategoryAction } from "@/app/actions/categories";
+import {
+  addCategoryAction,
+  updateCategoryAction,
+} from "@/app/actions/categories";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { HexColorPicker } from "react-colorful";
+import emojiRegex from "emoji-regex";
+import { Category } from "@/db/schema/categories";
 
 export const newCategoryFormSchema = z.object({
   name: z.string().min(1).max(70),
@@ -29,14 +34,14 @@ export const newCategoryFormSchema = z.object({
   icon: z.string(),
 });
 
-export default function FormCategory() {
+export default function FormCategory({ category }: { category?: Category }) {
   const form = useForm<z.infer<typeof newCategoryFormSchema>>({
     resolver: zodResolver(newCategoryFormSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      color: "#000",
-      icon: "",
+      name: category?.name || "",
+      description: category?.description || "",
+      color: category?.color || "#000",
+      icon: category?.icon || "",
     },
   });
 
@@ -44,10 +49,18 @@ export default function FormCategory() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) =>
-          toast.promise(addCategoryAction(data), {
-            success: "Category Created",
-            error: "Something went wrong",
-          }),
+          toast.promise(
+            category
+              ? updateCategoryAction({
+                  ...category,
+                  ...data,
+                })
+              : addCategoryAction(data),
+            {
+              success: "Category Created",
+              error: "Something went wrong",
+            },
+          ),
         )}
         className="space-y-6 mt-4"
       >
@@ -72,6 +85,29 @@ export default function FormCategory() {
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Input {...field} maxLength={300} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="icon"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Icon</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  className="text-4xl py-2 h-12"
+                  maxLength={300}
+                  onChange={(e) => {
+                    const matches = e.target.value.match(emojiRegex());
+                    if (matches?.length === 1 || e.target.value === "") {
+                      field.onChange(e.target.value);
+                    }
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -108,7 +144,7 @@ export default function FormCategory() {
           )}
         />
         <Button className="w-full mt-4" type="submit">
-          Create
+          {category ? "Update" : "Create"}
         </Button>
       </form>
     </Form>

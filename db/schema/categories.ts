@@ -1,5 +1,5 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { relations, sql } from "drizzle-orm";
+import { InferSelectModel, relations, sql } from "drizzle-orm";
 import { expenses } from "./expenses";
 
 // Categories table
@@ -22,3 +22,5 @@ export const categories = sqliteTable("categories", {
 export const categoriesRelations = relations(categories, ({ many }) => ({
   expenses: many(expenses),
 }));
+
+export type Category = InferSelectModel<typeof categories>;

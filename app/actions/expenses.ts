@@ -32,6 +32,19 @@ export async function getExpenses(
 
   const [sortBy, sortDirection] = sortSchema.parse(sort);
 
+  // Convert startDate and endDate to GMT
+  const startDateGMT = new Date(
+    Date.UTC(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      startDate.getDate(),
+    ),
+  );
+  const endDateGMT = new Date(
+    Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()),
+  );
+  console.log(startDateGMT, startDate);
+
   const result = await db
     .select()
     .from(expenses)
@@ -39,7 +52,7 @@ export async function getExpenses(
       and(
         eq(expenses.userId, userId),
         gte(expenses.date, startDate),
-        lt(expenses.date, endDate),
+        lt(expenses.date, endDateGMT),
       ),
     )
     .orderBy(
