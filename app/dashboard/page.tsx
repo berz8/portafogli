@@ -59,6 +59,7 @@ export default async function Dashboard() {
       name: "Uncategorized",
       color: "grey",
       amount: categoryExpenses.get("uncategorized"),
+      icon: "",
     },
   ];
 
@@ -130,17 +131,27 @@ export default async function Dashboard() {
       <div>
         <h3 className="my-4 font-bold text-gray-600">Categories</h3>
         <div className="flex flex-col">
-          {categoriesWithExpenses.map((cat) => (
-            <div key={cat.id} className="flex gap-3 py-1 items-center">
-              <div className="font-mono">{cat.name}</div>
+          {categoriesWithExpenses.map((cat, i) => (
+            <Link
+              href={`/dashboard/categories/${cat.id}`}
+              key={cat.id}
+              className={cn(
+                "flex gap-3 py-1 px-2 rounded-md items-center",
+                i % 2 === 0 && "bg-[#F2F2F1]",
+              )}
+            >
+              <div className="font-mono flex gap-2">
+                {cat.icon !== "" ? <div>{cat.icon}</div> : null}
+                <div>{cat.name}</div>
+              </div>
               <div
-                className="grow h-2 rounded-md"
+                className="grow h-1 rounded-md"
                 style={{ background: cat.color || "gray" }}
               />
               <div className="font-mono text-right">
                 € {getFormattedNumber(cat.amount)}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <Link

@@ -63,6 +63,41 @@ export async function getExpenses(
   return result;
 }
 
+export async function getExpensesByCategory(
+  categoryId: number,
+  startDate: Date,
+  endDate: Date,
+  sort: unknown,
+) {
+  const { userId }: { userId: string | null } = auth();
+  if (!userId) throw new Error("Couldn't retrieve userId");
+
+  const sortSchema = z.tuple([
+    z.enum(["date", "amount"]).default("date"),
+    z.enum(["asc", "desc"]).default("desc"),
+  ]);
+
+  const [sortBy, sortDirection] = sortSchema.parse(sort);
+
+  const result = await db
+    .select()
+    .from(expenses)
+    .where(
+      and(
+        eq(expenses.userId, userId),
+        eq(expenses.categoryId, categoryId),
+        gte(expenses.date, startDate),
+        lt(expenses.date, endDate),
+      ),
+    )
+    .orderBy(
+      sortDirection === "asc" ? asc(expenses[sortBy]) : desc(expenses[sortBy]),
+    )
+    .execute();
+
+  return result;
+}
+
 export async function addExpenseAction(
   data: z.infer<typeof newExpenseFormSchema>,
 ) {
