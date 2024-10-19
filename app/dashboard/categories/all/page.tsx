@@ -25,7 +25,10 @@ export default async function CategoriesAll() {
             key={cat.id}
             className="flex flex-col gap-1 pt-1"
           >
-            <div className="font-mono">{cat.name}</div>
+            <div className="font-mono flex gap-2">
+              {cat.icon !== "" ? <div>{cat.icon}</div> : null}
+              <div>{cat.name}</div>
+            </div>
             <div
               className="h-2 w-full rounded-md"
               style={{ background: cat.color ?? "#fafafa" }}
