@@ -7,9 +7,12 @@ import { Button } from "@/components/ui/button";
 import { getCategories } from "../actions/categories";
 
 export default async function Dashboard() {
+  const startDate = new Date();
+  const endDate = new Date();
+
   const currentMonthExpenses = await getExpenses(
-    startOfMonth(new Date()),
-    endOfMonth(new Date()),
+    startOfMonth(new Date(startDate.toUTCString())),
+    endOfMonth(new Date(endDate.toUTCString())),
     ["date", "desc"],
   );
 
@@ -84,11 +87,13 @@ export default async function Dashboard() {
           <h3 className="my-4 font-bold text-gray-600">Recent transactions</h3>
           <div className="flex flex-col gap-1">
             {currentMonthExpenses.slice(0, 6).map((item, i) => (
-              <div
+              <Link
+                href={`/dashboard/transactions/${item.id}`}
                 key={item.id}
                 className={cn(
                   "p-1 pl-2 font-mono flex justify-between rounded-md",
                   i % 2 === 0 && "bg-[#F2F2F1]",
+                  "transition-all duration-300 hover:scale-105",
                 )}
               >
                 <div className="flex">
@@ -103,7 +108,7 @@ export default async function Dashboard() {
                     )}
                   />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           {currentMonthExpenses.length > 0 ? (
@@ -138,6 +143,7 @@ export default async function Dashboard() {
               className={cn(
                 "flex gap-3 py-1 px-2 rounded-md items-center",
                 i % 2 === 0 && "bg-[#F2F2F1]",
+                "transition-all duration-300 hover:scale-105",
               )}
             >
               <div className="font-mono flex gap-2">

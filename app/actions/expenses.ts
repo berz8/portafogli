@@ -33,17 +33,6 @@ export async function getExpenses(
   const [sortBy, sortDirection] = sortSchema.parse(sort);
 
   // Convert startDate and endDate to GMT
-  const startDateGMT = new Date(
-    Date.UTC(
-      startDate.getFullYear(),
-      startDate.getMonth(),
-      startDate.getDate(),
-    ),
-  );
-  const endDateGMT = new Date(
-    Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()),
-  );
-  console.log(startDateGMT, startDate);
 
   const result = await db
     .select()
@@ -52,7 +41,7 @@ export async function getExpenses(
       and(
         eq(expenses.userId, userId),
         gte(expenses.date, startDate),
-        lt(expenses.date, endDateGMT),
+        lt(expenses.date, endDate),
       ),
     )
     .orderBy(
@@ -96,6 +85,18 @@ export async function getExpensesByCategory(
     .execute();
 
   return result;
+}
+
+export async function getExpense(id: number) {
+  const { userId }: { userId: string | null } = auth();
+  if (!userId) throw new Error("Couldn't retrieve userId");
+
+  return await db.query.expenses.findFirst({
+    where: and(eq(expenses.userId, userId), eq(expenses.id, id)),
+    with: {
+      category: true,
+    },
+  });
 }
 
 export async function addExpenseAction(

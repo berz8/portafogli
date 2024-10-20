@@ -6,6 +6,7 @@ import { endOfMonth, format, startOfMonth } from "date-fns";
 import { AllTransactionsFilters } from "./filters";
 import TotalCard from "./totalCard";
 import { getCategories } from "@/app/actions/categories";
+import { Link } from "next-view-transitions";
 
 export default async function NewTransactionPage({
   searchParams,
@@ -25,8 +26,8 @@ export default async function NewTransactionPage({
   const endDate = new Date(year, month, 0); // Last day of the month
 
   const expenses = await getExpenses(
-    startOfMonth(startDate),
-    endOfMonth(endDate),
+    startOfMonth(new Date(startDate.toUTCString())),
+    endOfMonth(new Date(endDate.toUTCString())),
     searchParams?.["sort"]?.toString().split("-") ?? ["date", "desc"],
   );
 
@@ -54,11 +55,13 @@ export default async function NewTransactionPage({
       <AllTransactionsFilters />
       <div className="flex flex-col flex-1 gap-1">
         {expenses.map((item, i) => (
-          <div
+          <Link
+            href={`/dashboard/transactions/${item.id}`}
             key={item.id}
             className={cn(
               "p-1 pl-2 flex justify-between rounded-md",
               i % 2 !== 0 && "bg-[#F2F2F1]",
+              "transition-all duration-300 hover:scale-105",
             )}
           >
             <div className="flex flex-col gap-1">
@@ -78,7 +81,7 @@ export default async function NewTransactionPage({
                 )}
               />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
