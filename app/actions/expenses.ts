@@ -107,7 +107,6 @@ export async function addExpenseAction(
     const expense = newExpenseSchema.parse(data);
     await db.insert(expenses).values({
       ...expense,
-      date: new Date(expense.date.setHours(12, 0, 0, 0)),
       userId,
     });
   } catch (err: unknown) {

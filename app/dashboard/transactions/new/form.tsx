@@ -63,10 +63,16 @@ export default function FormExpense({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) =>
-          toast.promise(addExpenseAction(data), {
-            success: "Item Added",
-            error: "Something went wrong",
-          }),
+          toast.promise(
+            addExpenseAction({
+              ...data,
+              date: new Date(data.date.setHours(12, 0, 0, 0)),
+            }),
+            {
+              success: "Item Added",
+              error: "Something went wrong",
+            },
+          ),
         )}
         className="space-y-6 mt-4"
       >
