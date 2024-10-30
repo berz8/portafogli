@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
-import { CirclePlus, Home, Settings } from "lucide-react";
+import { CirclePlus, Home, Repeat, Settings } from "lucide-react";
 
 export default function Navigation() {
   const currentPath = usePathname();
@@ -38,6 +38,18 @@ export default function Navigation() {
           prefetch={true}
         >
           <CirclePlus className="w-5 h-5" strokeWidth={2.7} />
+        </Link>
+        <Link
+          href="/dashboard/recurring"
+          className={cn(
+            "px-4 block py-1",
+            currentPath === "/dashboard/recurring"
+              ? "text-primary"
+              : "text-zinc-400",
+          )}
+          prefetch={true}
+        >
+          <Repeat className="w-5 h-5" strokeWidth={2.7} />
         </Link>
         <Link
           href="/dashboard/settings"
