@@ -88,7 +88,7 @@ export default function FormExpense({
             <FormItem className="w-full">
               <div
                 className={cn(
-                  "w-full p-1 rounded-md",
+                  "w-full p-1 rounded-sm opacity-90",
                   field.value === "out" ? "bg-red-600" : "bg-green-600",
                 )}
               />
@@ -96,7 +96,7 @@ export default function FormExpense({
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex bg-stone-200 shadow-[inset_0_0_4px_2px_rgba(0,0,0,0.1)] p-1 rounded-lg w-full"
+                  className="flex bg-stone-200 shadow-[inset_0_0_4px_2px_rgba(0,0,0,0.1)] p-[0.35rem] rounded-xl w-full"
                 >
                   <FormItem className="flex items-center grow space-y-0">
                     <FormControl>
@@ -108,7 +108,7 @@ export default function FormExpense({
                     </FormControl>
                     <FormLabel
                       htmlFor="r1"
-                      className="w-full mt-0 text-center px-3 py-2 rounded-md text-sm font-medium transition-all peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground cursor-pointer"
+                      className="w-full mt-0 text-center px-3 py-2 rounded-lg text-sm font-medium transition-all peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground cursor-pointer"
                     >
                       Expense
                     </FormLabel>
@@ -123,7 +123,7 @@ export default function FormExpense({
                     </FormControl>
                     <FormLabel
                       htmlFor="r2"
-                      className="w-full m-0 text-center px-3 py-2 rounded-md text-sm font-medium transition-all peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground cursor-pointer"
+                      className="w-full m-0 text-center px-3 py-2 rounded-lg text-sm font-medium transition-all peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground cursor-pointer"
                     >
                       Income
                     </FormLabel>
@@ -140,11 +140,11 @@ export default function FormExpense({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Amount</FormLabel>
-              <div className="flex gap-3">
-                <div className="text-3xl font-mono">€</div>
+              <div className="flex gap-3 items-center">
+                <div className="text-4xl font-mono">€</div>
                 <FormControl>
                   <Input
-                    className="text-right text-xl"
+                    className="text-right text-3xl h-11"
                     {...field}
                     onChange={(event) => {
                       if (

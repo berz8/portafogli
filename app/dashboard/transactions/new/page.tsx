@@ -6,7 +6,7 @@ export default async function NewExpense() {
   const categories = await getCategories();
   return (
     <div>
-      <div className="pt-4 px-4 -mx-4 drop-shadow-[0_-8px_3px_rgba(150,150,150,0.05)]">
+      <div className="pt-1 px-4 -mx-4 drop-shadow-[0_-8px_3px_rgba(150,150,150,0.05)]">
         <div className="relative">
           <svg
             className="w-full h-4 text-[#F6F6F6]"
