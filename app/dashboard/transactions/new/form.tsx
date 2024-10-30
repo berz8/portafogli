@@ -45,7 +45,12 @@ export const newExpenseFormSchema = z.object({
 export default function FormExpense({
   categories,
 }: {
-  categories: Array<{ id: number; name: string; color: string | null }>;
+  categories: Array<{
+    id: number;
+    name: string;
+    color: string | null;
+    icon: string | null;
+  }>;
 }) {
   const form = useForm<z.infer<typeof newExpenseFormSchema>>({
     resolver: zodResolver(newExpenseFormSchema),
@@ -230,7 +235,12 @@ export default function FormExpense({
                       key={category.id}
                       value={category.id.toString()}
                     >
-                      {category.name}
+                      <div className="flex gap-2 justify-start">
+                        {category.icon !== "" ? (
+                          <div>{category.icon}</div>
+                        ) : null}
+                        <div>{category.name}</div>
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>
