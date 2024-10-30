@@ -69,8 +69,8 @@ export default async function Dashboard() {
   return (
     <div>
       <div className="flex flex-col md:flex-row md:gap-4">
-        <div className="rounded-xl dark-metal-gradient p-4 text-right shadow-xl md:basis-1/2 md:items-center">
-          <div className="light-metal-text text-[3.3rem] leading-[3rem] font-mono font-semibold text-primary-foreground">
+        <div className="rounded-2xl dark-metal-gradient p-4 text-right shadow-xl md:basis-1/2 md:items-center">
+          <div className="light-metal-text text-4xl font-mono font-semibold text-primary-foreground">
             €{" "}
             {getFormattedNumber(
               categoriesWithExpenses.reduce(
@@ -85,7 +85,7 @@ export default async function Dashboard() {
         </div>
         <div className="md:basis-1/2 w-full">
           <h3 className="my-4 font-bold text-gray-600">Recent transactions</h3>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 text-sm md:text-base">
             {currentMonthExpenses.slice(0, 6).map((item, i) => (
               <Link
                 href={`/dashboard/transactions/${item.id}`}
@@ -141,7 +141,7 @@ export default async function Dashboard() {
               href={`/dashboard/categories/${cat.id}`}
               key={cat.id}
               className={cn(
-                "flex gap-3 py-1 px-2 rounded-md items-center",
+                "flex gap-3 py-1 px-2 rounded-md items-center text-sm md:text-base",
                 i % 2 === 0 && "bg-[#F2F2F1]",
                 "transition-all duration-300 hover:scale-105",
               )}
