@@ -1,5 +1,4 @@
 import { getExpenses } from "@/app/actions/expenses";
-import BackButton from "@/components/backButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, getFormattedNumber } from "@/lib/utils";
 import { endOfMonth, format, startOfMonth } from "date-fns";
@@ -35,7 +34,6 @@ export default async function NewTransactionPage({
 
   return (
     <div>
-      <BackButton href="/dashboard" />
       <Card className="bg-transparent border-none shadow-none">
         <CardHeader>
           <CardTitle className="text-center">Transactions List</CardTitle>

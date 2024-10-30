@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import { getCategory } from "@/app/actions/categories";
 import { Link } from "next-view-transitions";
 import { Pencil } from "lucide-react";
-import BackButton from "@/components/backButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getExpensesByCategory } from "@/app/actions/expenses";
 import { cn, getFormattedNumber } from "@/lib/utils";
@@ -39,7 +38,6 @@ export default async function categoryIdPage({
 
   return (
     <div>
-      <BackButton href="/dashboard/categories/all" />
       <Card className="bg-transparent border-none shadow-none">
         <CardHeader className="px-0 flex-row justify-between items-center">
           <div className="flex gap-2 items-center">

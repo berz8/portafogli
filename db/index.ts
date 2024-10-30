@@ -4,7 +4,7 @@ import "dotenv/config";
 import dotenv from "dotenv";
 import { users } from "./schema/users";
 import { expenses, expensesRelations } from "./schema/expenses";
-import { categories } from "./schema/categories";
+import { categories, categoriesRelations } from "./schema/categories";
 
 dotenv.config({
   path: [".env.local", ".env"],
@@ -20,5 +20,6 @@ export const db = drizzle(client, {
     expenses,
     expensesRelations,
     categories,
+    categoriesRelations,
   },
 });

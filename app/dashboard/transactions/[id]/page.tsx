@@ -1,5 +1,4 @@
 import { getExpense } from "@/app/actions/expenses";
-import BackButton from "@/components/backButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, getFormattedNumber } from "@/lib/utils";
 import { format } from "date-fns";
@@ -19,7 +18,6 @@ export default async function TransctionDetailPage({
 
   return (
     <div>
-      <BackButton href="/dashboard/transactions/all" />
       <Card className="bg-transparent border-none shadow-none">
         <CardHeader className="px-0 flex-row justify-between items-center">
           <div className="flex flex-col gap-1">

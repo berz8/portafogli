@@ -1,11 +1,9 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import BackButton from "@/components/backButton";
 import FormCategory from "./formNewcategory";
 
 export default async function NewCategory() {
   return (
     <div>
-      <BackButton href="/dashboard" />
       <div className="pt-4 px-4 -mx-4 drop-shadow-[0_-8px_3px_rgba(150,150,150,0.05)]">
         <div className="relative">
           <svg

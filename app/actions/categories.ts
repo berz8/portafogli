@@ -36,6 +36,36 @@ export async function getCategories() {
     .execute();
 }
 
+export async function getCategoriesWithExpenses(
+  startDate?: Date,
+  endDate?: Date,
+) {
+  const { userId }: { userId: string | null } = auth();
+  if (!userId) throw new Error("Couldn't retrieve userId");
+
+  return await db.query.categories
+    .findMany({
+      with: {
+        expenses: {
+          where: (expenses, { and, gte, lte }) => {
+            const conditions = [];
+
+            if (startDate) {
+              conditions.push(gte(expenses.date, startDate));
+            }
+            if (endDate) {
+              conditions.push(lte(expenses.date, endDate));
+            }
+
+            return conditions.length > 0 ? and(...conditions) : undefined;
+          },
+        },
+      },
+      where: eq(categories.userId, userId),
+    })
+    .execute();
+}
+
 export async function addCategoryAction(
   data: z.infer<typeof newCategoryFormSchema>,
   doRedirect: boolean = true,
