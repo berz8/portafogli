@@ -14,12 +14,9 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { CirclePlus, Home, Repeat, Settings } from "lucide-react";
-import { useAuth } from "@clerk/nextjs";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Navigation() {
-  const { isLoaded, userId } = useAuth();
-
   const currentPath = usePathname();
   const isMobile = useIsMobile();
 
@@ -45,10 +42,6 @@ export default function Navigation() {
       icon: Settings,
     },
   ];
-
-  if (!isLoaded || !userId) {
-    return null;
-  }
 
   if (!isMobile)
     return (
