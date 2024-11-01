@@ -89,6 +89,7 @@ export default function Navigation() {
       >
         {items.map((item) => (
           <Link
+            key={item.title}
             href={item.url}
             className={cn(
               "px-4 block py-1",
