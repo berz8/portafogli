@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { CirclePlus, Home, Repeat, Settings } from "lucide-react";
+import { CirclePlus, Home, Repeat, Settings, TrendingUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Navigation() {
@@ -25,6 +25,11 @@ export default function Navigation() {
       title: "Dashboard",
       url: "/dashboard",
       icon: Home,
+    },
+    {
+      title: "Insights",
+      url: "/dashboard/insights",
+      icon: TrendingUp,
     },
     {
       title: "New Transaction",
@@ -82,52 +87,18 @@ export default function Navigation() {
           "md:w-auto md:bottom-4 md:rounded-lg md:px-4 md:py-2 md:bg-white md:shadow-xl md:gap-5",
         )}
       >
-        <Link
-          href="/dashboard"
-          className={cn(
-            "px-4 block py-1",
-            currentPath === "/dashboard" ? "text-primary" : "text-zinc-400",
-          )}
-          prefetch={true}
-        >
-          <Home className="w-5 h-5" strokeWidth={2.7} />
-        </Link>
-        <Link
-          href="/dashboard/transactions/new"
-          className={cn(
-            "px-4 block py-1",
-            currentPath === "/dashboard/transactions/new"
-              ? "text-primary"
-              : "text-zinc-400",
-          )}
-          prefetch={true}
-        >
-          <CirclePlus className="w-5 h-5" strokeWidth={2.7} />
-        </Link>
-        <Link
-          href="/dashboard/recurring"
-          className={cn(
-            "px-4 block py-1",
-            currentPath === "/dashboard/recurring"
-              ? "text-primary"
-              : "text-zinc-400",
-          )}
-          prefetch={true}
-        >
-          <Repeat className="w-5 h-5" strokeWidth={2.7} />
-        </Link>
-        <Link
-          href="/dashboard/settings"
-          className={cn(
-            "px-4 block py-1",
-            currentPath === "/dashboard/settings"
-              ? "text-primary"
-              : "text-zinc-400",
-          )}
-          prefetch={true}
-        >
-          <Settings className="w-5 h-5" strokeWidth={2.7} />
-        </Link>
+        {items.map((item) => (
+          <Link
+            href={item.url}
+            className={cn(
+              "px-4 block py-1",
+              currentPath === item.url ? "text-primary" : "text-zinc-400",
+            )}
+            prefetch={true}
+          >
+            <item.icon className="w-5 h-5" strokeWidth={2.7} />
+          </Link>
+        ))}
       </div>
     </div>
   );
