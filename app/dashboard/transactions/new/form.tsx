@@ -144,6 +144,7 @@ export default function FormExpense({
                 <div className="text-4xl font-mono">€</div>
                 <FormControl>
                   <Input
+                    autoFocus
                     className="text-right text-3xl h-11"
                     {...field}
                     onChange={(event) => {
