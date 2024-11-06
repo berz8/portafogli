@@ -150,6 +150,7 @@ export default function FormExpense({
                     onChange={(event) => {
                       if (
                         Number(event.target.value.replace(",", ".")) ||
+                        Number(event.target.value.replace(",", ".")) === 0 ||
                         event.target.value === ""
                       )
                         field.onChange(event.target.value.replace(",", "."));
