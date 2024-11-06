@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getFormattedNumber(input: number): string {
-  if (input > 100000) {
+  if (Math.abs(input) > 100000) {
     return `${(input / 1000).toFixed(0)}K`;
   }
   return input.toFixed(2).toString();

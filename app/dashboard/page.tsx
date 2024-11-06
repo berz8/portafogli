@@ -69,18 +69,46 @@ export default async function Dashboard() {
   return (
     <div>
       <div className="flex flex-col md:flex-row md:gap-4">
-        <div className="rounded-2xl dark-metal-gradient p-4 text-right shadow-xl md:basis-1/2 md:items-center">
-          <div className="light-metal-text text-4xl font-mono font-semibold text-primary-foreground">
-            €{" "}
-            {getFormattedNumber(
-              categoriesWithExpenses.reduce(
-                (acc, item) => acc + item.amount,
-                0,
-              ),
-            )}
+        <div className="rounded-2xl dark-metal-gradient p-4 text-right shadow-xl md:basis-1/2 flex justify-between items-start">
+          <div className="flex gap-2 text-lg">
+            <div className="flex flex-col justify-end">
+              <div className="text-red-400">
+                {getFormattedNumber(
+                  currentMonthExpenses
+                    .filter((x) => x.type === "out")
+                    .reduce((acc, x) => acc - x.amount, 0),
+                )}
+              </div>
+              <div className="text-green-400 text-lg">
+                {getFormattedNumber(
+                  currentMonthExpenses
+                    .filter((x) => x.type === "in")
+                    .reduce((acc, x) => acc + x.amount, 0),
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col justify-start text-left">
+              <div className="min-w-6 text-primary-foreground opacity-70">
+                out
+              </div>
+              <div className="min-w-6 text-primary-foreground opacity-70">
+                in
+              </div>
+            </div>
           </div>
-          <div className="text-primary-foreground opacity-70">
-            Current Month Balance
+          <div>
+            <div className="light-metal-text text-4xl font-mono font-semibold text-primary-foreground">
+              €
+              {getFormattedNumber(
+                categoriesWithExpenses.reduce(
+                  (acc, item) => acc + item.amount,
+                  0,
+                ),
+              )}
+            </div>
+            <div className="text-primary-foreground opacity-70">
+              Current Month Balance
+            </div>
           </div>
         </div>
         <div className="md:basis-1/2 w-full">
