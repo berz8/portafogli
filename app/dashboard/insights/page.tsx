@@ -49,10 +49,9 @@ export default async function Insights({
 					<CardTitle className="text-center">Insights</CardTitle>
 				</CardHeader>
 			</Card>
-			<Tabs defaultValue="account" className="w-full">
+			<Tabs defaultValue="income" className="w-full">
 				<TabsList className="w-full grid grid-cols-3 h-auto rounded-2xl">
 					<TabsTrigger
-						defaultChecked={true}
 						value="income"
 						className="flex items-center justify-start gap-3 rounded-xl"
 					>
@@ -65,7 +64,6 @@ export default async function Insights({
 						</div>
 					</TabsTrigger>
 					<TabsTrigger
-						defaultChecked={true}
 						value="expenses"
 						className="flex items-center justify-start gap-3 rounded-xl"
 					>
@@ -78,7 +76,6 @@ export default async function Insights({
 						</div>
 					</TabsTrigger>
 					<TabsTrigger
-						defaultChecked={true}
 						value="total"
 						className="flex items-center justify-start gap-3 rounded-xl"
 					>
