@@ -11,7 +11,7 @@ export default async function DashboadLayout({
       <SidebarProvider>
         <Navigation />
         <main className="bg-primary-foreground md:m-2 md:rounded-lg w-full">
-          <div className="md:w-5/6 lg:w-3/5 mx-auto mt-4 mb-[CALC(60px_+_env(safe-area-inset-bottom))] px-4">
+          <div className="md:w-5/6 lg:w-4/5 mx-auto mt-4 mb-[CALC(60px_+_env(safe-area-inset-bottom))] px-4">
             {children}
           </div>
         </main>

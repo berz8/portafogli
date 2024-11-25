@@ -69,7 +69,7 @@ export default async function Dashboard() {
   return (
     <div>
       <div className="flex flex-col md:flex-row md:gap-4">
-        <div className="rounded-2xl dark-metal-gradient p-4 text-right shadow-xl md:basis-1/2 flex justify-between items-start">
+        <div className="rounded-2xl dark-metal-gradient p-4 text-right shadow-xl md:basis-1/2 flex justify-between items-start lg:flex-col-reverse lg:gap-4 lg:items-end lg:justify-end">
           <div className="flex gap-2 text-lg">
             <div className="flex flex-col justify-end">
               <div className="text-red-400">
@@ -97,7 +97,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div>
-            <div className="light-metal-text text-4xl font-mono font-semibold text-primary-foreground">
+            <div className="light-metal-text text-4xl lg:text-6xl font-mono font-semibold text-primary-foreground">
               €
               {getFormattedNumber(
                 categoriesWithExpenses.reduce(
@@ -112,7 +112,9 @@ export default async function Dashboard() {
           </div>
         </div>
         <div className="md:basis-1/2 w-full">
-          <h3 className="my-4 font-bold text-gray-600">Recent transactions</h3>
+          <h3 className="my-4 lg:mt-0 font-bold text-gray-600">
+            Recent transactions
+          </h3>
           <div className="flex flex-col gap-1 text-sm md:text-base">
             {currentMonthExpenses.slice(0, 6).map((item, i) => (
               <Link
